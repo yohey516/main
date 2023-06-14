@@ -1,6 +1,6 @@
-# Shopping List Application
+# Shopping List Application (SLA)
 
-This is a web application that allows users to create and manage shopping lists. Users can add, delete, and edit items, as well as check off purchased items.
+This is a web application that allows users to create and manage shopping lists. Users can add, delete, and edit items, as well as share the list to someone who has username.
 
 ## Features
 
@@ -8,8 +8,7 @@ This is a web application that allows users to create and manage shopping lists.
 - Create and Display Shopping Lists: Users can create new shopping lists and view existing ones.
 - Add and Remove Items: Users can add items to the shopping list or remove unnecessary items.
 - Edit Items: Users can edit the information of existing items.
-- Check Items: Users can check off purchased items or revert them to an unchecked state.
-- Add Categories and Tags: Users can categorize items using categories and tags.
+- Share List: users can share the list to someone who has user name.
 
 ## Setup
 1. Clone the project:
@@ -23,14 +22,7 @@ npm install
 
 4. Configure the database. Replace XXX with the database connection information.
 
-// config/db.js
-
-module.exports = {
-url: 'mongodb://XXX'
-};
-
-5. Start the application: npm start
-6. Access the application in your browser: http://localhost:3000
+5. Access the application in your browser: http://localhost:4444
 
 
 
@@ -39,14 +31,13 @@ url: 'mongodb://XXX'
 1. Create a new account or log in with an existing account.
 2. Create shopping lists and add items to them.
 3. Edit or remove items as needed.
-4. Check off items to mark them as purchased.
-5. Use categories and tags to classify items.
+4. Share the list to someone who has username.
 
 ## Tech Stack
 
 - Backend: Node.js, Express.js
 - Frontend: HTML, CSS, JavaScript
-- Database: MongoDB
+- Database: Cloudinary
 - User Authentication: Passport.js
 - Other Packages: multer
 
@@ -56,4 +47,4 @@ To contribute to this project, fork the repository and create a pull request.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is not limited to copy.

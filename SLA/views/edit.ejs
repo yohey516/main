@@ -1,0 +1,28 @@
+<div class="container top" id="sticker">
+<h2 id ="green">Edit Item</h2>
+<form action="/items/<%= item._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+  <div >
+    <label for="name">Current Image:</label>
+    <img src="<%= item.image %>" alt="Current Image" width="100"><br><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= item.name %>" required>
+    <br><br>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" value="<%= item.quantity %>" required>
+    <br><br>
+    <label for="image">Change Image:</label>
+    <input type="file" id="image" name="image">
+    <br><br>
+    <button type="button" onclick="cancel()">Cancel</button>
+    <button type="submit">OK</button>
+  </div>
+</form>
+</div>
+<script>
+  function cancel() {
+    window.location.href = "/home";
+  }
+</script>
+
+
+
