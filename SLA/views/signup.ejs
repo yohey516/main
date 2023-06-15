@@ -1,17 +1,21 @@
 <div class="container top" id="sticker">
 <h2>Create New Account</h2><br>
+<div style="position: relative;">
 <form action="/signup" method="POST">
+  <div style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 30px;">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username" required>
-  <br><br>
-  <label for="email">E-mail  :</label>
+  <br>
+  <label for="email">E-mail Address:</label>
   <input type="email" id="email" name="email" required>
-  <br><br>
+  <br>
   <label for="password">Password:</label>
   <input type="password" id="password" name="password" required>
-  <br><br>
-  <button id="black" class="button" type="submit">Sign Up</button><br>
-  <!-- <a href="/login" id="palegreen" class="button" type="submit">Sign Up</a> -->
+  <br>
+  </form>
+  </div>
+  <button id="palevioletred" class="button" type="submit">Sign Up</button><br><br>
   <a href="/login"><h6>Hmm, I already have an account.</h6></a>
 </form>
+<div>
 <div>

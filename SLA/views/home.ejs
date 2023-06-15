@@ -1,7 +1,6 @@
 <div class="container">
   <% if (currentUser && currentUser.items && currentUser.items.length > 0) { %>
     <h2 ><%= currentUser.username %>'s Shopping List</h2>
-    
     <ul class="item-list">
       <% for (let i = 0; i < currentUser.items.length; i++) { %>
         <li id="sticker" style="position: relative;">
@@ -12,9 +11,9 @@
           <div>
             <form action="/delete/<%= i %>?_method=DELETE" method="POST" style="display: inline-block;">
               <input type="hidden" name="_method" value="DELETE">
-              <button class="button" type="submit">Delete</button>
+              <button class="button" id="black" type="submit">Delete</button>
             </form>
-            <a class="button" id="black" href='/edit/<%= currentUser.items[i]._id %>' style="display: inline-block;">Update</a>
+            <a class="button" href='/edit/<%= currentUser.items[i]._id %>' style="display: inline-block;" >Update</a>
           </div>
         </li>
       <% } %>
@@ -22,6 +21,5 @@
   <% } else { %>
     <p>No items found.</p>
   <% } %>
-  
   <%- include('partials/menu') %>
 </div>
