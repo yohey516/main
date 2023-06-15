@@ -20,8 +20,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      console.log(file.originalname)
-      console.log('buffer',file.buffer)
+      // console.log(file.originalname)
+      // console.log('buffer',file.buffer)
       const splitName = file.originalname.split(".")
       cb(null, `${file.fieldname}-${uniqueSuffix}.${splitName[splitName.length - 1]}`)
   }

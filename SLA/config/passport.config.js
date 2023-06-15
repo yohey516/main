@@ -21,15 +21,15 @@ passport.use(new LocalStrategy({
     User.findOne({ email: email}).
         then(user => {
         if(!user) {
-            console.log("user:", user)
-            return cb(null, false, { message: "User not found"} )
+            // console.log("user:", user)
+            return cb(null, false, { type: "error", message: "User not found"} )
         }
         //check if password is a match
         if(!user.validPassword(password)){
-            console.log(!user.validPassword(password))
-            return cb(null, false, { message: "Password not a match"} )
+            // console.log(!user.validPassword(password))
+            return cb(null, false, { type: "error", message: "Password not a match"} )
         }
-        console.log("loggedin user: ", user)
+        // console.log("loggedin user: ", user)
         return cb(null, user)
     }).catch(err => {
         cb(err)

@@ -1,18 +1,22 @@
 <div class="container top" id="sticker">
 <h2>Add Item</h2><br>
+<div style="position: relative;">
 <form action="/create" method="POST" enctype="multipart/form-data">
-    <label for="name">Name:</label>
+    <div style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 100px;">
+    <label for="name">Name of item:</label>
     <input type="text" id="name" name="name" required>
-    <br><br>
-    <label for="quantity">Quantity</label>
+    <br>
+    <label for="quantity">Quantity of item</label>
     <input type="number" id="quantity" name="quantity" required>
-    <br><br>
-    <label for="image">Image:</label>
+    <br>
+    <label for="image">Image of item:</label>
     <input type="file" id="image" name="image">
-    <br><br>
-    <button type="button" onclick="cancel()">Cancel</button>
-    <button type="submit">OK</button>
+    <br>
+    </div>
+    <button class="button" type="button" onclick="cancel()">Cancel</button>
+    <button class="button" id="palevioletred" type="submit">OK</button>
 </form>
+</div>
 </div>
 <script>
   function cancel() {

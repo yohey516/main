@@ -1,10 +1,11 @@
 <div class="container">
   <% if (currentUser && currentUser.items && currentUser.items.length > 0) { %>
-    <h2 >Items for <%= currentUser.username %></h2>
+    <h2 ><%= currentUser.username %>'s Shopping List</h2>
     
     <ul class="item-list">
       <% for (let i = 0; i < currentUser.items.length; i++) { %>
-        <li id="sticker">
+        <li id="sticker" style="position: relative;">
+          <img src="/tape.png" alt="Tape" class="tape-image">
           <img src="<%= currentUser.items[i].image %>" alt="Item Image" width="235px"><br>
           Name: <%= currentUser.items[i].name %><br>
           Quantity: <%= currentUser.items[i].quantity %><br>
@@ -13,7 +14,7 @@
               <input type="hidden" name="_method" value="DELETE">
               <button class="button" type="submit">Delete</button>
             </form>
-            <a class="button" id="palegreen" href='/edit/<%= currentUser.items[i]._id %>' style="display: inline-block;">Edit</a>
+            <a class="button" id="black" href='/edit/<%= currentUser.items[i]._id %>' style="display: inline-block;">Update</a>
           </div>
         </li>
       <% } %>
@@ -22,7 +23,5 @@
     <p>No items found.</p>
   <% } %>
   
-  <a class="button" id="palevioletred" href='/create' style="position: fixed; top: 100px; left: 20px;">Add Item</a>
-  <a class="button" id="white" href='/create' style="position: fixed; top: 160px; left: 20px;">Add User</a>
-  <a class="button" href='/logout' style="position: fixed; top: 240px; left: 20px;">Log out</a>
+  <%- include('partials/menu') %>
 </div>

@@ -37,7 +37,7 @@ app.use(
     secret: process.env.SECRET,
     saveUninitialized: true,
     resave: false,
-    cookie: { maxAge: 360000 },
+    cookie: { maxAge: 7200000 },
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB,
       secret: process.env.SECRET, 
@@ -51,8 +51,10 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(function (request, response, next) {
-  response.locals.alerts = request.flash(); //{ success: [], error: []}
+  const flashErrorFromPassport = { error : request.session.messages || [] }
+  response.locals.alerts = request.session.messages ? flashErrorFromPassport : request.flash(); //{ success: [], error: []}
   response.locals.currentUser = request.user;
+  delete request.session.messages //walk around since message arent deleted
   next();
 });
 

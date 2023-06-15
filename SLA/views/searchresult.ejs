@@ -1,0 +1,27 @@
+<div class="container">
+      <h2 ><%= user.username %>'s Shopping List</h2>
+      <% if(Array.isArray(user.items) && user.items.length > 0) { %>
+      <ul class="item-list">
+        <% user.items.forEach(item => { %>
+          <li id="sticker" style="position: relative;">
+            <img src="/tape.png" alt="Tape" class="tape-image">
+            <img src="<%= item.image %>" alt="Item Image" width="235px"><br>
+            <div> Name: <%= item.name %></div>
+            <div>Quantity: <%= item.quantity %></div>
+            <% if(user.username == currentUser.username){ %>
+            <div>
+                <form action="/delete/<%= item._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="button" type="submit">Delete</button>
+                </form>
+                <a class="button" id="black" href='/edit/<%= item._id %>' style="display: inline-block;">Update</a>
+              </div>
+              <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No items found.</p>
+    <% } %>
+    <%- include('partials/menu') %>
+    </div>

@@ -3,9 +3,11 @@ body {
     justify-content: center;
     margin-top: 50px;
     font-family: "Comic Sans MS";
-    background-image: linear-gradient(180deg, #ccc 1px, transparent 1px);
-    background-size: 100% 2em;
-    line-height: 2em;
+    background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%),
+                    linear-gradient(180deg, #ccc 1px, transparent 1px);
+    background-size: 8px 100%,
+                   100% 2.5em;
+    line-height: 1.5em;
     padding-bottom: 1px;
 }
 
@@ -26,15 +28,17 @@ body {
   }
 
 .button {
+    width: 100px;
+    height: 40px;
     display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
+    margin: 5px;
+    padding: 5px 5px;
     background-color: #afafaf;
     border: none;
     border-radius: 5px;
     text-decoration: none;
     color: #333;
-    font-size: 14px;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -50,14 +54,19 @@ body {
     list-style: none;
     background-color: white;
 }
-  
+
+.item-list li img {
+    transform: rotate(2deg);
+    transform-origin: center;
+    box-shadow: 0 .5rem .5rem hsla(0, 0%, 0%, .1);
+  }
 
 #sticker {
     flex: 0 0 450px;
     height: 450px;
     background-color: rgb(255, 246, 144);
     background-image:
-    radial-gradient(#8f8f8f 2%, transparent 2%);
+    radial-gradient(#8f8f8f 4%, transparent 4%);
     background-size: 30px 30px;
     box-shadow: 0 .5rem .5rem hsla(0, 0%, 0%, .1);
 }
@@ -69,11 +78,20 @@ body {
 
 }
 
-#palegreen {
-    background-color: palegreen;
+#black {
+    color: white;
+    background-color: black;
 }
 
 
 #palevioletred {
     background-color: palevioletred;
 }
+
+.tape-image {
+    position: absolute;
+    top: -4%;
+    left: 45%;
+    z-index: 1;
+  }
+  

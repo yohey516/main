@@ -16,7 +16,6 @@ router.get("/signup", (req, res) => {
 
 // Handle user signup
 router.post("/signup", async (req, res) => {
-  console.log(req.body)
   try {
     const user = new User({ ...req.body });
     await user.save();
@@ -29,7 +28,16 @@ router.post("/signup", async (req, res) => {
 
 // Display the login form
 router.get("/login", (req, res) => {
-  res.render("login");
+  const errorMessage = {message: ""}
+  if(req.query.error == 1){
+    errorMessage.message="something went wrong"
+  }
+
+  if(req.query.error == 2){
+    errorMessage.message="user not found"
+  }
+
+  res.render("login", errorMessage);
 });
 
 // Handle user login
@@ -38,12 +46,28 @@ router.post(
   passport.authenticate("local", {
     successRedirect: "/home",
     failureRedirect: "/login",
+    failureMessage: true,
+    successMessage: "Successfully logged in"
   })
 );
 
+// Handle user login
+// router.post("/login",(req, res, next) => {
+//   passport.authenticate("local", function(err, user, info){
+//     if(err) {
+//       return res.redirect("/login?error=1")
+//     }
+
+//     if(!user) {
+//       return res.redirect("/login?error=2")
+//     }
+//     console.log({err, user, info})
+//     return res.redirect("/home")
+//   })(req, res, next)
+// });
+
 // Display the login form
 router.get("/home", secureRoute, (req, res) => {
-  console.log(req.user)
   res.render("home", {
     user: req.user
   });
@@ -56,19 +80,11 @@ router.get("/create", (req, res) => {
 // Create a new item
 router.post("/create", [secureRoute,multerStorageCloudinary.single('image')], async (req, res) => {
   try {
-    console.log(req.file)
     if(!req.file.path){
       throw new Error("Unable to upload image to cloudinary")
     }
     const { name, quantity } = req.body;
     const newItem = { name, quantity, image : req.file.path };
-    // User.findById(req.user._id).then((user) => {
-    //   const { name, quantity } = req.body;
-    //   const newItem = { name, quantity, image : req.file.path };
-    //   user.items.push(newItem);
-    //   return user.save()
-    // })
-
     await User.findByIdAndUpdate(req.user._id, { $push:{
         items: newItem
       }})
@@ -114,8 +130,8 @@ router.get("/edit/:id", (req, res) => {
         res.redirect("/home");
       }
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e);
       res.redirect("/home");
     });
 });
@@ -144,11 +160,46 @@ router.put("/items/:id", upload.single('image'), (req, res) => {
     .then(() => {
       res.redirect("/home");
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((e) => {
+      console.log(e);
       res.redirect("/home");
     });
 });
+
+// Display the login form
+router.get("/check", secureRoute, (req, res) => {
+  const errorMessage = {message: ''}
+
+  if(req.query.error == 1){
+    errorMessage.message = "Bad request..."
+  }
+
+  if(req.query.error == 2){
+    errorMessage.message = "User not found, please enter a valid username"
+  }
+
+  res.render("check", errorMessage);
+});
+
+// Handle user addition
+router.post("/check", secureRoute, async (req, res) => {
+  try {
+    const username = req.body.username;
+    if (!username) {
+     return res.redirect("/check?error=1") //1 means no user in body
+    } 
+    
+    const existingUser = await User.findOne({ username: username });
+    if (!existingUser) {
+      return res.redirect("/check?error=2") //2 means user not found
+    } 
+    
+    return res.render("searchresult", { user: existingUser});
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 
 // For Logout
 router.get("/logout", (req, res) => {
